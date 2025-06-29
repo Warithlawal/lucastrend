@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Product Page - Lucastrend</title>
+	<link rel="stylesheet" href="styles.css">
+   <script src="https://kit.fontawesome.com/127aef0c53.js" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      data-purpose="Layout StyleSheet"
+      title="Web Awesome"
+      href="/css/app-wa-09b459cf485d4b1f3304947240314c05.css?vsn=d">
+     <link
+        rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+     <link
+        rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-duotone-solid.css">
+     <link
+        rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-thin.css">
+     <link
+        rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-solid.css">
+     <link
+        rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-regular.css">
+     <link
+        rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-light.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+      <a href="index.html" class="logo-img">
+         <img src="images/logo.png">
+      </a>
+      <div class="nav-links">
+         <a href="products.html">ALL PRODUCTS</a>
+         <div class="cart">
+            <a href="cart.html"><i class="fa-sharp fa-light fa-bags-shopping"></i></a>
+            <p class="cart-number"></p>
+         </div>
+      </div>
+   </nav>
+
+   <section class="product-page-container">
+     <div class="product-page-image L">
+       <img id="product-image" src="images/" alt="Product image of a shirt">
+     </div>
+
+     <div class="product-page-details R">
+       <nav>
+         <a href="index.html">Home</a> / <a href="products.html">Products</a> / <span id="product-breadcrumb"></span>
+       </nav>
+
+       <h3 id="product-name"></h3>
+       <p id="product-price"></p>
+
+       <div class="size">
+           <p>Size</p>
+           <ul id="size-options">
+             <li><a href="#" data-size="S">S</a></li>
+             <li><a href="#" data-size="M">M</a></li>
+             <li><a href="#" data-size="L">L</a></li>
+             <li><a href="#" data-size="XL">XL</a></li>
+             <li><a href="#" data-size="2XL">2XL</a></li>
+           </ul>
+         </div>
+
+
+       <hr>
+
+       <div class="quantity">
+           <div class="quantity-flex">
+             <span id="decrease-btn" class="decrease">-</span>
+             <span id="quantity-value" class="middle">1</span>
+             <span id="increase-btn" class="increase">+</span>
+           </div>
+      </div>
+
+       <hr>
+
+      <div class="add-to-cart">
+         <button id="add-to-cart-btn">Add to cart</button>
+         <span id="added-text" style="display: none;">Added</span>
+       </div>
+     </div>
+</section>
+
+   <footer>
+      <div class="footer1">
+         <div class="footer-link">
+            <h3>Quick Links</h3>
+
+           <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="products.html">Products</a></li>
+              <li><a href="cart.html">Cart</a></li>
+            </ul>
+         </div>
+
+         <div class="footer-link">
+            <h3>Socials</h3>
+
+            <ul>
+              <li><a href="#"><i class="fa-brands fa-instagram" aria-label="Instagram"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-tiktok" aria-label="TikTok"></i></a></li>
+            </ul>
+         </div>
+      </div>
+
+      <hr>
+
+      <div class="copyright">
+         <p>Copyright © 2025 Lucastrend</p>
+
+         <p>Powered by Lucastrend</p>
+      </div>
+   </footer>
+ <script type="module" src="firebase.js"></script>
+ <script type="module" src="productpage.js"></script>
+ <script src="shared.js"></script>
+</body>
+</html>
