@@ -42,11 +42,12 @@
    </nav>
 
    <section class="product-page-container">
-     <div class="product-page-image L">
+
+     <div class="product-page-image">
        <img id="product-image" src="images/" alt="Product image of a shirt">
      </div>
 
-     <div class="product-page-details R">
+     <div class="product-page-details">
        <nav>
          <a href="index.html">Home</a> / <a href="products.html">Products</a> / <span id="product-breadcrumb"></span>
        </nav>
@@ -57,11 +58,7 @@
        <div class="size">
            <p>Size</p>
            <ul id="size-options">
-             <li><a href="#" data-size="S">S</a></li>
-             <li><a href="#" data-size="M">M</a></li>
-             <li><a href="#" data-size="L">L</a></li>
-             <li><a href="#" data-size="XL">XL</a></li>
-             <li><a href="#" data-size="2XL">2XL</a></li>
+             
            </ul>
          </div>
 
@@ -79,9 +76,11 @@
        <hr>
 
       <div class="add-to-cart">
-         <button id="add-to-cart-btn">Add to cart</button>
-         <span id="added-text" style="display: none;">Added</span>
-       </div>
+        <button id="add-to-cart-btn">Add to cart</button>
+        <span id="added-text" style="display: none; color: green;">Added</span>
+       <span id="select-size-msg" style="display: none; color: red;">Please select a size</span>
+      </div>
+
      </div>
 </section>
 
