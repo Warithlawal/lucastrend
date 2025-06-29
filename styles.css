@@ -19,6 +19,7 @@ nav {
 .nav-links {
 	display: flex;
 	gap: 40px;
+	align-items: center;
 }
 
 .nav-links a {
@@ -864,7 +865,7 @@ main a {
 	}
 
 	main {
-		padding: 15px 30px;
+		padding: 15px 5px;
 	}
 
 	.product-page-container {
@@ -878,10 +879,22 @@ main a {
 	.R {
 		order: 1;
 	}
+
+	.product-page-details h3 {
+	  font-size: 33px;
+	}
 }
 
 
 @media only screen and (max-width :500px) {
+
+	nav {
+		padding: 30px 20px;
+	}
+
+	.nav-links {
+		gap: 20px;
+	}
 
 	.hero {
 		background: url("./images/banner.png") center/cover no-repeat;
@@ -958,8 +971,8 @@ main a {
 	}
 
 	.hot-deals {
-		padding: 40px 0 20px;
-		margin-top: 100px;
+		margin: 20px 0 0;
+		padding: 20px 0 20px;
 	}
 
 	.category-container {
