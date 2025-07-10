@@ -243,3 +243,15 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
   loadCategories();
 });
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleArrow = document.querySelector(".toggle-arrow");
+  const categoryList = document.getElementById("category-filter");
+
+  toggleArrow?.addEventListener("click", () => {
+    categoryList.classList.toggle("show");
+    toggleArrow.classList.toggle("rotate");
+  });
+});
