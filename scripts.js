@@ -1,15 +1,12 @@
-// Import Firebase Firestore
 import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
 const db = window.db;
 let allProducts = [];
 
-// ✅ Currency Formatter
 function formatCurrency(n) {
   return `₦${Number(n).toLocaleString()}`;
 }
 
-// ✅ Update cart icon badge
 function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const count = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -17,38 +14,70 @@ function updateCartCount() {
   if (badge) badge.textContent = count;
 }
 
-// ✅ Render Products to Page
 function renderProducts(products) {
   const container = document.getElementById("products-container");
   if (!container) return;
 
   container.innerHTML = "";
 
+  const imageLoadPromises = [];
+
   products.forEach(product => {
     const card = document.createElement("div");
     card.classList.add("products-card");
 
-    card.innerHTML = `
-      <a href="product-page.html?id=${product.id}">
-        <img src="${product.image}" alt="${product.name}">
-      </a>
-      <div class="add-cart-container">
-        <div>
-          <p class="product-name">${product.name}</p>
-          <p class="product-price">${formatCurrency(product.price)}</p>
-        </div>
-        <button class="add-to-cart-btn" data-id="${product.id}" aria-label="Add to cart">
-          <i class="fa-light fa-plus"></i>
-        </button>
-      </div>
-    `;
+    const img = new Image();
+    img.src = product.image;
+    img.alt = product.name;
+
+    // Loader promise
+    const imgPromise = new Promise(resolve => {
+      img.onload = resolve;
+      img.onerror = resolve;
+    });
+    imageLoadPromises.push(imgPromise);
+
+    const link = document.createElement("a");
+    link.href = `product-page.html?id=${product.id}`;
+    link.appendChild(img);
+
+    const addCartContainer = document.createElement("div");
+    addCartContainer.classList.add("add-cart-container");
+
+    const name = document.createElement("p");
+    name.classList.add("product-name");
+    name.textContent = product.name;
+
+    const price = document.createElement("p");
+    price.classList.add("product-price");
+    price.textContent = formatCurrency(product.price);
+
+    const btn = document.createElement("button");
+    btn.classList.add("add-to-cart-btn");
+    btn.dataset.id = product.id;
+    btn.setAttribute("aria-label", "Add to cart");
+    btn.innerHTML = `<i class="fa-light fa-plus"></i>`;
+
+    const div = document.createElement("div");
+    div.appendChild(name);
+    div.appendChild(price);
+
+    addCartContainer.appendChild(div);
+    addCartContainer.appendChild(btn);
+
+    card.appendChild(link);
+    card.appendChild(addCartContainer);
 
     container.appendChild(card);
   });
+
+  return Promise.all(imageLoadPromises); // return promise to wait
 }
 
-// ✅ Load Products from Firestore
 async function loadProducts() {
+  const loader = document.getElementById("page-loader");
+  if (loader) loader.style.display = "flex";
+
   const snapshot = await getDocs(collection(db, "products"));
   allProducts = [];
   snapshot.forEach(doc => {
@@ -56,10 +85,12 @@ async function loadProducts() {
     product.id = doc.id;
     allProducts.push(product);
   });
-  renderProducts(allProducts);
+
+  await renderProducts(allProducts);
+
+  if (loader) loader.style.display = "none";
 }
 
-// ✅ Load Cart for Cart Page
 function loadCart() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const cartContainer = document.getElementById("cart-container");
@@ -125,7 +156,6 @@ function loadCart() {
   updateCartCount();
 }
 
-// ✅ Cart Interaction Buttons
 function attachCartEvents() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -159,7 +189,6 @@ function attachCartEvents() {
   });
 }
 
-// ✅ Setup Category Filters
 function setupCategoryFilter() {
   const links = document.querySelectorAll(".category-link");
 
@@ -182,7 +211,6 @@ function setupCategoryFilter() {
   });
 }
 
-// ✅ Load Homepage Categories from Firestore
 async function loadCategories() {
   const container = document.getElementById("category-container");
   if (!container) return;
@@ -208,7 +236,6 @@ async function loadCategories() {
   });
 }
 
-// ✅ Initialize All on Page Load
 document.addEventListener("DOMContentLoaded", () => {
   loadProducts();
   setupCategoryFilter();

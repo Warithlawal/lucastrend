@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const decreaseBtn = document.getElementById("decrease-btn");
   const productImage = document.getElementById("product-image");
   const thumbnailGallery = document.getElementById("thumbnail-gallery");
+  const pageLoader = document.getElementById("page-loader");
 
   let selectedSize = null;
   let quantity = 1;
@@ -23,21 +24,30 @@ document.addEventListener("DOMContentLoaded", () => {
   async function loadProduct() {
     if (!productId) return;
 
+    pageLoader.style.display = "flex"; // Show loader
+
     const docRef = doc(db, "products", productId);
     const docSnap = await getDoc(docRef);
 
     if (!docSnap.exists()) {
       document.querySelector(".product-page-details").innerHTML = "<p>Product not found.</p>";
+      pageLoader.style.display = "none";
       return;
     }
 
     const product = docSnap.data();
 
-    // ✅ Display main image
-    productImage.src = product.image;
-    productImage.alt = product.name;
+    // ✅ Preload main image and show loader until ready
+    const tempImage = new Image();
+    tempImage.src = product.image;
 
-    // ✅ Thumbnail logic (if product.images array exists)
+    tempImage.onload = () => {
+      productImage.src = product.image;
+      productImage.alt = product.name;
+      pageLoader.style.display = "none";
+    };
+
+    // ✅ Thumbnail logic
     if (product.images && Array.isArray(product.images)) {
       thumbnailGallery.innerHTML = "";
 
@@ -49,25 +59,30 @@ document.addEventListener("DOMContentLoaded", () => {
         if (index === 0) thumb.classList.add("active");
 
         thumb.addEventListener("click", () => {
-          productImage.src = imgUrl;
+          pageLoader.style.display = "flex";
 
-          document.querySelectorAll(".thumbnail").forEach(img => img.classList.remove("active"));
-          thumb.classList.add("active");
+          const newImage = new Image();
+          newImage.src = imgUrl;
+
+          newImage.onload = () => {
+            productImage.src = imgUrl;
+            pageLoader.style.display = "none";
+
+            document.querySelectorAll(".thumbnail").forEach(img => img.classList.remove("active"));
+            thumb.classList.add("active");
+          };
         });
 
         thumbnailGallery.appendChild(thumb);
       });
-
-      // Ensure main image is first from array
-      productImage.src = product.images[0];
     }
 
-    // ✅ Render other product data
+    // ✅ Product info
     document.getElementById("product-name").textContent = product.name;
     document.getElementById("product-breadcrumb").textContent = product.name;
     document.getElementById("product-price").textContent = `₦${Number(product.price).toLocaleString()}`;
 
-    // ✅ Render size options
+    // ✅ Sizes
     const sizeOptions = document.getElementById("size-options");
     sizeOptions.innerHTML = "";
     (product.sizes || []).forEach(size => {
