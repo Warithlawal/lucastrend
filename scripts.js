@@ -30,7 +30,6 @@ function renderProducts(products) {
     img.src = product.image;
     img.alt = product.name;
 
-    // Loader promise
     const imgPromise = new Promise(resolve => {
       img.onload = resolve;
       img.onerror = resolve;
@@ -41,8 +40,8 @@ function renderProducts(products) {
     link.href = `product-page.html?id=${product.id}`;
     link.appendChild(img);
 
-    const addCartContainer = document.createElement("div");
-    addCartContainer.classList.add("add-cart-container");
+    const productInfoContainer = document.createElement("div");
+    productInfoContainer.classList.add("add-cart-container");
 
     const name = document.createElement("p");
     name.classList.add("product-name");
@@ -52,27 +51,22 @@ function renderProducts(products) {
     price.classList.add("product-price");
     price.textContent = formatCurrency(product.price);
 
-    const btn = document.createElement("button");
-    btn.classList.add("add-to-cart-btn");
-    btn.dataset.id = product.id;
-    btn.setAttribute("aria-label", "Add to cart");
-    btn.innerHTML = `<i class="fa-light fa-plus"></i>`;
+    const textContainer = document.createElement("div");
+    textContainer.appendChild(name);
+    textContainer.appendChild(price);
 
-    const div = document.createElement("div");
-    div.appendChild(name);
-    div.appendChild(price);
-
-    addCartContainer.appendChild(div);
-    addCartContainer.appendChild(btn);
+    productInfoContainer.appendChild(textContainer);
+    // No add to cart button appended here ✅
 
     card.appendChild(link);
-    card.appendChild(addCartContainer);
+    card.appendChild(productInfoContainer);
 
     container.appendChild(card);
   });
 
-  return Promise.all(imageLoadPromises); // return promise to wait
+  return Promise.all(imageLoadPromises);
 }
+
 
 async function loadProducts() {
   const loader = document.getElementById("page-loader");
@@ -236,17 +230,42 @@ async function loadCategories() {
   });
 }
 
+// ✅ Load Hot Deals from Firestore
+async function loadHotDeals() {
+  const container = document.querySelector(".hot-deals-container");
+  if (!container) return;
+
+  const snapshot = await getDocs(collection(db, "products"));
+  container.innerHTML = "";
+
+  snapshot.forEach(doc => {
+    const product = doc.data();
+    if (product.hotdeal === true) {
+      const card = document.createElement("div");
+      card.classList.add("hot-deals-card");
+
+      card.innerHTML = `
+        <a href="product-page.html?id=${doc.id}">
+          <img src="${product.image}" alt="${product.name}">
+        </a>
+        <p class="deals-product-name">${product.name}</p>
+        <p class="deals-product-price">${formatCurrency(product.price)}</p>
+      `;
+
+      container.appendChild(card);
+    }
+  });
+}
+
+// ✅ Main init function
 document.addEventListener("DOMContentLoaded", () => {
   loadProducts();
   setupCategoryFilter();
   loadCart();
   updateCartCount();
   loadCategories();
-});
+  loadHotDeals();
 
-
-
-document.addEventListener("DOMContentLoaded", () => {
   const toggleArrow = document.querySelector(".toggle-arrow");
   const categoryList = document.getElementById("category-filter");
 

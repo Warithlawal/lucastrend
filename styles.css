@@ -206,7 +206,7 @@ nav {
 
 .hot-deals-card img {
 	width: 100%;
-	height: 220px;
+	height: 100%;
   	display: block;
   	object-fit: cover;
 }
@@ -218,29 +218,6 @@ nav {
 	position: relative;
 }
 
-.add-to-cart-btn {
-  font-size: 15px;
-  color: black;
-  padding: 12px 12px;
-  background: white;
-  border: none;
-  border-radius: 100%;
-  position: absolute;
-  right: 15px;
-  top: 30px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.add-to-cart-btn i {
-  font-size: 15px;
-  color: black;
-}
-
-.hot-deals-card:hover .add-to-cart-btn {
-  opacity: 1;
-}
 
 
 
@@ -964,6 +941,7 @@ main a {
 @media only screen and (max-width :600px) {
 	.products-grid {
 		 grid-template-columns: repeat(2, 1fr);
+		 padding: 0 10px;
 	}
 
 	main {
@@ -990,6 +968,10 @@ main a {
 
 @media only screen and (max-width :500px) {
 
+	.logo-img img {
+		width: 250px;
+	}
+
 	nav {
 		padding: 30px 20px;
 	}
@@ -1000,7 +982,7 @@ main a {
 
 	.hero {
 		background: url("./images/banner.png") center/cover no-repeat;
-		min-height: calc(100vh - 230px);
+		min-height: calc(100vh - 330px);
 	}
 	.category-container h3 {
 		font-size: 35px;
