@@ -453,9 +453,10 @@ main a {
 
 .products-card img {
   	width: 100%;
-  	height: 250px;
+  	height: 300px;
   	display: block;
   	object-fit: cover;
+  	border-radius: 5px;
 }
 
 .product-price {
@@ -506,13 +507,65 @@ main a {
 }
 
 .product-page-image {
-  max-width: 400px;
-	margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.product-page-image img {
+.product-image-wrapper {
+  position: relative;
   width: 100%;
-  display: block;
+  max-width: 400px;
+  margin: auto;
+}
+
+#product-image {
+  width: 100%;
+  max-width: 400px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* Loader style (shimmer effect) */
+.image-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 8px;
+  z-index: 2;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.thumbnail-gallery {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.thumbnail-gallery img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  transition: border 0.3s ease;
+}
+
+.thumbnail-gallery img.active {
+  border-color: #000;
 }
 
 .product-page-details {

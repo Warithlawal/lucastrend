@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const quantityValue = document.getElementById("quantity-value");
   const increaseBtn = document.getElementById("increase-btn");
   const decreaseBtn = document.getElementById("decrease-btn");
+  const productImage = document.getElementById("product-image");
+  const thumbnailGallery = document.getElementById("thumbnail-gallery");
 
   let selectedSize = null;
   let quantity = 1;
@@ -31,13 +33,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const product = docSnap.data();
 
-    // Render product
-    document.getElementById("product-image").src = product.image;
+    // ✅ Display main image
+    productImage.src = product.image;
+    productImage.alt = product.name;
+
+    // ✅ Thumbnail logic (if product.images array exists)
+    if (product.images && Array.isArray(product.images)) {
+      thumbnailGallery.innerHTML = "";
+
+      product.images.forEach((imgUrl, index) => {
+        const thumb = document.createElement("img");
+        thumb.src = imgUrl;
+        thumb.alt = `Thumbnail ${index + 1}`;
+        thumb.classList.add("thumbnail");
+        if (index === 0) thumb.classList.add("active");
+
+        thumb.addEventListener("click", () => {
+          productImage.src = imgUrl;
+
+          document.querySelectorAll(".thumbnail").forEach(img => img.classList.remove("active"));
+          thumb.classList.add("active");
+        });
+
+        thumbnailGallery.appendChild(thumb);
+      });
+
+      // Ensure main image is first from array
+      productImage.src = product.images[0];
+    }
+
+    // ✅ Render other product data
     document.getElementById("product-name").textContent = product.name;
     document.getElementById("product-breadcrumb").textContent = product.name;
     document.getElementById("product-price").textContent = `₦${Number(product.price).toLocaleString()}`;
 
-    // Sizes
+    // ✅ Render size options
     const sizeOptions = document.getElementById("size-options");
     sizeOptions.innerHTML = "";
     (product.sizes || []).forEach(size => {
@@ -46,9 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
       sizeOptions.appendChild(li);
     });
 
-    setupSizeSelection(); // Attach listeners
+    setupSizeSelection();
 
-    // ✅ Cart logic after product loaded
+    // ✅ Add to Cart
     addToCartBtn.addEventListener("click", () => {
       if (!selectedSize) {
         selectSizeMsg.style.display = "inline";
@@ -59,8 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Add to cart
-      addToCart(productId, product.name, product.price, selectedSize, quantity, product.image);
+      addToCart(productId, product.name, product.price, selectedSize, quantity, productImage.src);
       addedText.style.display = "inline";
       selectSizeMsg.style.display = "none";
       setTimeout(() => {

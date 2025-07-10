@@ -115,7 +115,7 @@ document.getElementById("whatsapp-checkout").addEventListener("click", (e) => {
     return;
   }
 
-  let message = "*New Order from Lucastrend 👕🛍️*\n\n";
+  let message = "*New Order*\n\n";
 
   let total = 0;
 
