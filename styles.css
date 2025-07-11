@@ -510,6 +510,27 @@ main a {
   transition: 0.3s ease-out;
 }
 
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.pagination-container button {
+  background: #f1f1f1;
+  border: none;
+  margin: 0 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination-container button.active {
+  background: #000;
+  color: #fff;
+}
+
+
 
 /**--------------------------------------------------Product-page---------------------------------------------------**/
 
