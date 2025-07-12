@@ -137,6 +137,7 @@ nav {
   overflow: hidden;
   cursor: pointer;
   border-radius: 5px;
+   height: 420px;
 }
 
 .category-card img {
@@ -1061,6 +1062,15 @@ main a {
 
 	.what-we-offer-grid h4 {
 		padding: 0;
+	}
+
+	.what-we-offer-grid img {
+		width: 52px;
+	}
+
+	.what-we-offer-grid p {
+		font-size: 16px;
+		font-weight: 300;
 	}
 
 	.banner-text {
