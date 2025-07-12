@@ -58,14 +58,15 @@ function renderProducts(products, page = 1, productsPerPage = 10) {
     container.appendChild(card);
   });
 
-  renderPagination(products.length, page, productsPerPage, products);
+  renderPagination(products.length, page, productsPerPage);
 }
 
-function renderPagination(totalItems, currentPage, itemsPerPage, filteredProducts) {
+function renderPagination(totalItems, currentPage, itemsPerPage) {
   const pagination = document.getElementById("pagination");
   if (!pagination) return;
 
   pagination.innerHTML = "";
+
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   if (totalPages <= 1) return;
 
@@ -75,7 +76,7 @@ function renderPagination(totalItems, currentPage, itemsPerPage, filteredProduct
     if (i === currentPage) btn.classList.add("active");
 
     btn.addEventListener("click", () => {
-      renderProducts(filteredProducts, i);
+      renderProducts(allProducts, i);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
@@ -94,6 +95,16 @@ async function loadProducts() {
     product.id = doc.id;
     allProducts.push(product);
   });
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoryFilter = urlParams.get("category");
+
+  if (categoryFilter) {
+    const filtered = allProducts.filter(p => p.category?.toLowerCase() === categoryFilter.toLowerCase());
+    renderProducts(filtered, 1);
+  } else {
+    renderProducts(allProducts, 1);
+  }
 
   if (loader) loader.style.display = "none";
 }
@@ -232,12 +243,12 @@ async function loadCategories() {
     card.classList.add("category-card");
 
     card.innerHTML = `
-      <img src="${category.image}" alt="${category.name}">
-      <div class="layer">
-        <p>${category.name}</p>
-        <a href="products.html?category=${encodeURIComponent(category.slug || category.name.toLowerCase())}">Shop now</a>
-      </div>
-    `;
+    <img src="${category.image}" alt="${category.name}">
+    <div class="layer">
+      <p>${category.name}</p>
+      <a href="products.html?category=${encodeURIComponent(category.slug || category.name.toLowerCase())}">Shop now</a>
+    </div>
+  `;
 
     container.appendChild(card);
   });
@@ -269,33 +280,37 @@ async function loadHotDeals() {
   });
 }
 
+async function loadHeroBanner() {
+  const snapshot = await getDocs(collection(db, "banners"));
+  if (snapshot.empty) return;
+
+  const bannerData = snapshot.docs[0].data();
+
+  const hero = document.getElementById("hero-banner");
+  const title = document.getElementById("hero-title");
+  const link = document.getElementById("hero-link");
+
+  if (hero && bannerData.image) {
+    hero.style.backgroundImage = `url('${bannerData.image}')`;
+  }
+  if (title && bannerData.title) {
+    title.textContent = bannerData.title;
+  }
+  if (link) {
+    link.textContent = bannerData.ctaText || "Shop now";
+    link.href = bannerData.ctaLink || "products.html";
+  }
+}
+
 // ✅ Main init function
-document.addEventListener("DOMContentLoaded", async () => {
-  await loadProducts();
+document.addEventListener("DOMContentLoaded", () => {
+  loadHeroBanner();
+  loadProducts();
   setupCategoryFilter();
   loadCart();
   updateCartCount();
   loadCategories();
   loadHotDeals();
-
-  // Category filtering via ?category=
-  const urlParams = new URLSearchParams(window.location.search);
-  const initialCategory = urlParams.get("category");
-
-  if (initialCategory) {
-    const selected = initialCategory.toLowerCase();
-
-    const activeLink = document.querySelector(`.category-link[data-category="${selected}"]`);
-    if (activeLink) {
-      document.querySelectorAll(".category-link").forEach(l => l.classList.remove("active"));
-      activeLink.classList.add("active");
-    }
-
-    const filtered = allProducts.filter(p => p.category?.toLowerCase() === selected);
-    renderProducts(filtered, 1);
-  } else {
-    renderProducts(allProducts, 1);
-  }
 
   const toggleArrow = document.querySelector(".toggle-arrow");
   const categoryList = document.getElementById("category-filter");
