@@ -136,6 +136,7 @@ nav {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .category-card img {
@@ -1054,6 +1055,10 @@ main a {
 		padding: 20px 0;
 	}
 
+	.hot-deals-card img {
+		height: 200px;
+	}
+
 	.what-we-offer-grid h4 {
 		padding: 0;
 	}
@@ -1110,7 +1115,7 @@ main a {
 	}
 
 	.products-card img {
-		height: 220px;
+		height: 180px;
 	}
 
 	.cart-img img {
