@@ -80,21 +80,24 @@ nav {
 /**------------------------------------------------Header------------------------------------------------------**/
 
 .hero {
-	background: url("./images/banner.png") center/cover no-repeat;
-	min-height: calc(100vh - 130px);
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: center;
-	padding: 0 40px;
-	gap: 30px;
+  min-height: calc(100vh - 130px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 40px;
+  gap: 30px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hero h1 {
-	color: white;
 	text-transform: uppercase;
 	font-size: 66px;
 	max-width: 700px;
+	margin-bottom: 30px;
+	font-weight: 800;
 }
 
 .hero a {
@@ -137,7 +140,7 @@ nav {
   overflow: hidden;
   cursor: pointer;
   border-radius: 5px;
-   height: 420px;
+  height: 420px;
 }
 
 .category-card img {
@@ -1007,12 +1010,13 @@ main a {
 		gap: 20px;
 	}
 
-	.hero {
-		background: url("./images/banner.png") center/cover no-repeat;
-		min-height: calc(100vh - 330px);
-	}
 	.category-container h3 {
 		font-size: 35px;
+		padding: 30px 0;
+	}
+
+	.category-card {
+	  height: 380px;
 	}
 
 	.layer p {
@@ -1095,7 +1099,6 @@ main a {
 	}
 
 	.hot-deals {
-		margin: 20px 0 0;
 		padding: 20px 0 20px;
 	}
 
