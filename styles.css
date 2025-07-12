@@ -184,7 +184,6 @@ nav {
 /**--------------------------------------------------Hotdeals---------------------------------------------------**/
 
 .hot-deals {
-	background: #f6f7f9;
 	padding: 40px 0 80px;
 	margin-top: 100px;
 }
@@ -206,16 +205,18 @@ nav {
 
 .hot-deals-card img {
 	width: 100%;
-	height: 100%;
-  	display: block;
-  	object-fit: cover;
+	height: 300px;
+  object-fit: contain;
 }
 
 .hot-deals-card {
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
-	position: relative;
+	border: 0.5px solid black;
+	border-radius: 4px;
+	padding: 10px;
+	text-transform: uppercase;
 }
 
 
@@ -465,6 +466,9 @@ main a {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+	border: 0.3px solid black;
+	border-radius: 5px;
+	padding: 0 10px;
 }
 
 .products-card img {
