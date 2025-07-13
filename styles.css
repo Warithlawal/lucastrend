@@ -568,7 +568,7 @@ main a {
   width: 100%;
   max-width: 400px;
   height: 500px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 10px;
   margin-bottom: 10px;
 }
@@ -995,7 +995,7 @@ main a {
 }
 
 
-@media only screen and (max-width :500px) {
+@media only screen and (max-width :599px) {
 
 	.logo-img img {
 		width: 250px;
