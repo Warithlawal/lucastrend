@@ -714,7 +714,6 @@ main a {
 	align-items: center;
 }
 
-
 .productandquantitylabel {
 	display: flex;
 	justify-content: space-between;
@@ -755,7 +754,7 @@ main a {
 .cart-img {
   width: 100px;
   height: 130px;
- 
+  border: 0.3px solid #ccc;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -1327,6 +1326,21 @@ main a {
 	  width: 120px;
 	  height: 120px;
 	}
+
+	.cart-item {
+		gap: 15px;
+	}
+
+	.cart-item-title {
+		font-size: 14px;
+	}
+
+	.cart-details {
+		font-size: 14px;
+		gap: 8px;
+	}
+
+
 
 	.checkout-layout {
 	  grid-template-columns: 1fr;
