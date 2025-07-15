@@ -11,7 +11,7 @@ function loadCart() {
 
   if (cart.length === 0) {
     cartContainer.innerHTML = "<p>Your cart is empty.</p>";
-    updateCartCount(); // 🔄 Ensure badge resets to 0
+    updateCartCount();
     return;
   }
 
@@ -58,14 +58,11 @@ function loadCart() {
   });
 
   let subtotal = 0;
-
   cart.forEach(item => {
     subtotal += item.price * item.quantity;
   });
 
-document.querySelector(".subtotal-price").textContent = formatCurrency(subtotal);
-
-
+  document.querySelector(".subtotal-price").textContent = formatCurrency(subtotal);
   attachCartEvents();
 }
 
@@ -77,7 +74,7 @@ function attachCartEvents() {
       const index = btn.dataset.index;
       cart[index].quantity++;
       localStorage.setItem("cart", JSON.stringify(cart));
-      updateCartCount(); // 🔥 Added here
+      updateCartCount();
       loadCart();
     });
   });
@@ -88,7 +85,7 @@ function attachCartEvents() {
       if (cart[index].quantity > 1) {
         cart[index].quantity--;
         localStorage.setItem("cart", JSON.stringify(cart));
-        updateCartCount(); // 🔥 Added here
+        updateCartCount();
         loadCart();
       }
     });
@@ -99,54 +96,13 @@ function attachCartEvents() {
       const index = btn.dataset.index;
       cart.splice(index, 1);
       localStorage.setItem("cart", JSON.stringify(cart));
-      updateCartCount(); // 🔥 Added here
+      updateCartCount();
       loadCart();
     });
   });
 }
 
-document.getElementById("whatsapp-checkout").addEventListener("click", (e) => {
-  e.preventDefault();
-
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  if (cart.length === 0) {
-    alert("Your cart is empty.");
-    return;
-  }
-
-  let message = "*New Order*\n\n";
-
-  let total = 0;
-
-  cart.forEach((item, index) => {
-    const itemTotal = item.quantity * item.price;
-    total += itemTotal;
-
-    message += `${index + 1}. *${item.name}*\n`;
-    message += `   Size: ${item.size}\n`;
-    message += `   Qty: ${item.quantity}\n`;
-    message += `   Price: ₦${item.price.toLocaleString()}\n`;
-    message += `   Subtotal: ₦${itemTotal.toLocaleString()}\n\n`;
-  });
-
-  message += `*Total: ₦${total.toLocaleString()}*`;
-
-  // Encode the message for URL
-  const encodedMessage = encodeURIComponent(message);
-
-  // Replace with your business WhatsApp number (with country code, no + or spaces)
-  const phoneNumber = "2347018527982";
-
-  // Build the WhatsApp URL
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
-  // Open WhatsApp
-  window.open(whatsappUrl, "_blank");
-});
-
-
 document.addEventListener("DOMContentLoaded", () => {
   loadCart();
-  if (typeof updateCartCount === "function") updateCartCount(); // from shared.js
+  if (typeof updateCartCount === "function") updateCartCount();
 });

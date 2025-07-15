@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Checkout - Lucastrend</title>
+	  <link rel="stylesheet" href="styles.css">
+   <script src="https://kit.fontawesome.com/127aef0c53.js" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      data-purpose="Layout StyleSheet"
+      title="Web Awesome"
+      href="/css/app-wa-09b459cf485d4b1f3304947240314c05.css?vsn=d">
+     <link
+        rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+     <link
+        rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-duotone-solid.css">
+     <link
+        rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-thin.css">
+     <link
+        rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-solid.css">
+     <link
+        rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-regular.css">
+     <link
+        rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-light.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+   <nav>
+      <a href="index.html" class="logo-img">
+         <img src="images/logo.png">
+      </a>
+      <div class="nav-links">
+          <a href="products.html">PRODUCTS</a>
+         <div class="cart">
+            <a href="cart.html"><i class="fa-sharp fa-light fa-bags-shopping"></i></a>
+            <p class="cart-number">0</p>
+         </div>
+      </div>
+   </nav>
+
+   <body>
+     <section class="checkout-layout">
+       <section class="checkout-form-section left">
+         <h2>Delivery Info</h2>
+         <form id="checkout-form" class="checkoutform">
+           <label>Full Name</label>
+           <input type="text" id="user-name" required>
+
+           <label>Email</label>
+           <input type="email" id="user-email" required>
+
+           <label>Phone Number</label>
+           <input type="tel" id="user-phone" required>
+
+           <label>Address</label>
+           <input type="text" id="user-address" required>
+
+           <label>State</label>
+           <select id="user-state" required>
+             <option value="">--Select State--</option>
+             <option value="Lagos">Lagos (₦2000)</option>
+             <option value="Abuja">Abuja (₦2500)</option>
+             <option value="Others">Others (₦3000)</option>
+           </select>
+
+           <p id="final-total" class="bold-text"></p>
+           <button type="submit">Pay with Paystack</button>
+         </form>
+       </section>
+
+       <section class="checkoutsummary right" id="checkout-summary">
+         <!-- Cart items summary will be generated here -->
+       </section>
+     </section>
+
+      <footer>
+         <div class="footer1">
+            <div class="footer-link">
+               <h3>Quick Links</h3>
+
+              <ul>
+                 <li><a href="index.html">Home</a></li>
+                 <li><a href="products.html">Products</a></li>
+                 <li><a href="cart.html">Cart</a></li>
+               </ul>
+            </div>
+
+            <div class="footer-link">
+               <h3>Socials</h3>
+
+               <ul>
+                <li><a href="https://www.instagram.com/baggyznjeans?igsh=MnA2bmVrd25udXMy" target="_blank"><i class="fa-brands fa-instagram" aria-label="Instagram"></i></a></li>
+                
+               </ul>
+            </div>
+         </div>
+         <hr>
+         <div class="copyright">
+            <p>Copyright © 2025 Lucastrend</p>
+
+            <p>Powered by Lucastrend</p>
+         </div>
+      </footer>
+   <script src="checkout.js"></script>
+   <script type="module" src="firebase.js"></script>
+   <script type="module" src="scripts.js"></script>
+   <script src="shared.js"></script>
+   <script src="cart.js"></script>
+</body>
+</html>

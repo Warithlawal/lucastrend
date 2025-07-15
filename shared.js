@@ -16,3 +16,4 @@ function updateCartCount() {
 
 // Run automatically on all pages where this script is loaded
 document.addEventListener("DOMContentLoaded", updateCartCount);
+
