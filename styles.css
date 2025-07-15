@@ -927,6 +927,7 @@ main a {
   gap: 20px;
   font-size: 14px;
   padding: 0 10px;
+  text-transform: uppercase;
 }
 
 .checkout-item p{
