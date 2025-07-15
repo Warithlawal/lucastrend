@@ -542,7 +542,7 @@ main a {
 /**--------------------------------------------------Product-page---------------------------------------------------**/
 
 .product-page-container {
-  padding: 60px 5%;
+  padding: 30px 5%;
   background: #f6f7f9;
   gap: 50px;
   display: grid;
@@ -566,7 +566,6 @@ main a {
 #product-image {
   width: 100%;
   max-width: 400px;
-  height: 500px;
   object-fit: contain;
   border-radius: 10px;
   margin-bottom: 10px;
@@ -756,7 +755,7 @@ main a {
 .cart-img {
   width: 100px;
   height: 130px;
-  border: 0.5px solid black;
+ 
   border-radius: 5px;
   display: flex;
   justify-content: center;
