@@ -5,8 +5,10 @@ function formatCurrency(n) {
 }
 
 function loadCart() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const cartContainer = document.getElementById("cart-container");
+  if (!cartContainer) return; // prevent error if not on cart page
+
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
   cartContainer.innerHTML = "";
 
   if (cart.length === 0) {
@@ -57,14 +59,12 @@ function loadCart() {
     cartContainer.appendChild(cartGroup);
   });
 
-  let subtotal = 0;
-  cart.forEach(item => {
-    subtotal += item.price * item.quantity;
-  });
-
+  let subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   document.querySelector(".subtotal-price").textContent = formatCurrency(subtotal);
+
   attachCartEvents();
 }
+
 
 function attachCartEvents() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];

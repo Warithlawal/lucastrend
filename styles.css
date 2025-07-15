@@ -884,9 +884,10 @@ main a {
   background: #fff;
 }
 
-.checkoutform h2,
+.checkout-form-section h2,
 .checkoutsummary h2 {
   margin-bottom: 20px;
+  text-transform: uppercase;
 }
 
 .checkout-form-section h2 {
@@ -1334,6 +1335,8 @@ main a {
 
 	.checkoutsummary  {
 		border: none;
+		margin-top: 10px;
+		padding: 15px 10px;
 	}
 
 	.left {
@@ -1344,9 +1347,35 @@ main a {
 		order: 1;
 	}
 
-	.checkoutform,
-	.checkoutsummary {
+	.checkoutform {
 	  padding: 15px 0;
+	  gap: 10px;
+	}
+
+	.checkoutform input,
+	.checkoutform select {
+	  height: 40px;
+	  text-align: center;
+	  align-items: center;
+	}
+
+	.checkoutform label {
+	  margin-top: 0;
+	  font-weight: 300;
+	}
+
+	.checkoutsummary h2 {
+	  margin-bottom: 15px;
+	}
+
+	.checkout-form-section h2,
+	.checkoutsummary h2 {
+	  font-size: 20px;
+	  text-transform: uppercase;
+	}
+
+	.checkout-form-section h2 {
+		 margin-bottom: 0;
 	}
 }
 
