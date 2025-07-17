@@ -754,7 +754,7 @@ main a {
 .cart-img {
   width: 100px;
   height: 130px;
- 
+  border: 0.5px solid #ccc;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -865,6 +865,7 @@ main a {
   overflow: hidden;
   gap: 0;
   border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   padding: 0 5%;
 }
 
@@ -1329,7 +1330,7 @@ main a {
 	}
 
 	.cart-item {
-		gap: 15px;
+		gap: 10px;
 	}
 
 	.cart-item-title {
